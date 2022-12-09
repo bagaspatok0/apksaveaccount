@@ -9,7 +9,7 @@ from kivy.uix.screenmanager import ScreenManager
 
 import sqlite3, webbrowser, os
 
-Window.size = 360, 600
+# Window.size = 360, 600
 
 class UI(ScreenManager):
     pass
