@@ -1,0 +1,154 @@
+#: import get_color_from_hex kivy.utils.get_color_from_hex
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+<UI>:
+    Screen:
+        name: 'homeapp'
+        MDFloatLayout:
+            orientation: 'vertical'
+
+            MDTopAppBar:
+                title: 'PATOK'
+                md_bg_color:get_color_from_hex('251749')
+                left_action_items: [['menu', lambda x: nav_drawer.set_state('open')]]
+                right_action_items: [['database']]
+                pos_hint: {'top':1}
+
+            MDLabel:
+                id: texttitle
+                text: 'PATOK ACCOUNT'
+                bold: True
+                pos_hint: {'center_x': 0.8,'center_y': 0.75}
+
+            MDTextField:
+                id: user_input
+                size_hint_x: .6
+                hint_text: 'Enter User'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+                icon_right: 'account'
+
+            MDTextField:
+                id: email_input
+                size_hint_x: .6
+                hint_text: 'Enter Email'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+                icon_right: 'email'
+
+            MDTextField:
+                id: password_input
+                size_hint_x: .6
+                hint_text: 'Enter Password'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+                icon_right: 'key-variant'
+                password: True
+
+            MDRectangleFlatIconButton:
+                text: 'Add account'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+                icon: 'account-plus'
+                md_bg_color: get_color_from_hex('8758FF')
+                text_color: 'white'
+                line_color: 'white'
+                icon_color: 'white'
+                on_press: app.submit()
+
+            MDRectangleFlatIconButton:
+                text: 'Show Data'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+                icon: 'database'
+                md_bg_color: get_color_from_hex('65647C')
+                text_color: 'white'
+                line_color: 'white'
+                icon_color: 'white'
+                on_release: root.transition = FadeTransition(clearcolor=(0,0,0,0)) ;root.current = 'export-database'
+                on_press: app.export_database()
+
+            MDNavigationDrawer: 
+                id: nav_drawer
+                BoxLayout:
+                    orientation: 'vertical'
+                    spacing: '8dp'
+                    padding: '8dp'
+
+                    Image:
+                        source: 'profile.jpg'
+                    
+                    MDLabel:
+                        text: 'Bagas | Student'
+                        font_style: 'H5'
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        halign: 'center'
+                    
+                    MDLabel:
+                        text: 'cssbagas@gmail.com'
+                        font_style: 'Body1'
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        halign: 'center'
+                    
+                    MDLabel:
+                        text: ''
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        halign: 'center'
+
+                    ScrollView:
+                        MDList:
+                            OneLineIconListItem:
+                                text: 'Instagram'
+                                on_press: app.instagram()
+                                IconLeftWidget:
+                                    icon: 'instagram'
+                            OneLineIconListItem:
+                                text: 'Facebook'
+                                on_press: app.facebook()
+                                IconLeftWidget:
+                                    icon: 'facebook'
+                            OneLineIconListItem:
+                                text: 'Twitter'
+                                on_press: app.twitter()
+                                IconLeftWidget:
+                                    icon: 'twitter'
+                            OneLineIconListItem:
+                                text: 'Github'
+                                on_press: app.github()
+                                IconLeftWidget:
+                                    icon: 'github'
+                            OneLineIconListItem:
+                                text: 'MyWeb'
+                                on_press: app.mywebsite()
+                                IconLeftWidget:
+                                    icon: 'web'
+
+    Screen:
+        name: 'export-database'
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: '12dp'
+            MDRectangleFlatIconButton:
+                text: 'Back'
+                on_release: root.transition = FadeTransition(clearcolor=(0,0,0,0)); root.current = 'homeapp'
+                pos_hint: {'top':1}
+                icon: 'arrow-left'
+                line_color: 'white'
+                text_color: 'black'
+                icon_color: 'black'
+
+            ScrollView:
+
+                MDLabel:
+                    id: listdatabase
+                    text: ''
+                    height: self.texture_size[1]
+                    size_hint_y: None
+                    halign: 'center'
+            
+            MDRectangleFlatIconButton:
+                text: 'DELETE ALL DATA'
+                icon: 'delete-variant'
+                md_bg_color: 'red'
+                text_color: 'white'
+                icon_color: 'white'
+                on_press: app.deletedatabase()
+                widget_position: 'bottom'
