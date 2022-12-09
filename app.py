@@ -89,7 +89,7 @@ class PatokAccount(MDApp):
         webbrowser.open('https://patok.vercel.app')
     
     def deletedatabase(self):
-        os.remove('rm -rf databaseaccount.db')
+        os.remove('databaseaccount.db')
 
 if __name__ == '__main__':
     PatokAccount().run()
